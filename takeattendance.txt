@@ -1,0 +1,66 @@
+<?php 
+session_start();
+if(!isset($_SESSION['login']))
+header("Location: home1.php");
+?>
+<?php
+
+
+date_default_timezone_set('Asia/Karachi');
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		
+		h1
+		{
+			text-align:center;
+margin-top:5px;
+padding: 10px;
+text-indent:10px;
+font-family:  "Source Sans Pro", sans-serif ;
+letter-spacing: 4px;
+font-size:30px;
+word-spacing: 3px;
+color: blue;
+}
+	</style>
+	<title>TAKE ATTENDANCE</title>
+	<link rel="stylesheet" type="text/css" href="home.css">
+</head>
+<body>
+
+
+<form  style="margin-top: 5%;" action="takeatt.php" autocomplete="on" method="post" >
+	<h1>MARK ATTENDANCE</h1>
+	<label>Date Last Class Entered</label>
+	<input type="Date" name="lastclassentered" required>
+	<br>
+	<label>Department:  </label>
+	<input type="text" name="discipline" required>
+	<br>
+	<label>Course Code:  </label>
+	<input type="text" name="coursecode" required>
+	<br>
+
+	<label>Semester:  </label>
+	<input type="text" name="year" required>
+	<br>
+	<label>Roll No:   </label>
+	<input type="text" name="rollno" required>
+	<br>
+	<label>Total CLasses Held:   </label>
+	<input type="text" name="classesheld" required>
+	<br>
+	<label>Total Classes Attended:   </label>
+	<input type="text" name="present" required>
+	<br>
+	<button style=" margin-top: 5%;left: 45%;border-style: solid; border-color: black;word-spacing: 3px; color: blue;" type="submit" name="submit" onclick="myfunction()">submit</button>
+	<p id="demo" style="margin-top: 10%; margin-left: 44%;" ></p>
+</form>
+
+	
+</body>
+</html>
+<!--if(department.value.length != 0 || semester.value.length !=0 || rollno.value.length !=0)-->

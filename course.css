@@ -1,0 +1,36 @@
+h1{
+    text-align:center;
+padding:10px;
+text-indent:10px;
+font-family:  "Source Sans Pro", sans-serif ;
+letter-spacing: 0px;
+font-size:20px;
+color:blue;
+}
+.p
+{
+    font-family: "Source Sans Pro", sans-serif;
+   font-size:15px;
+   color:#5c5c89;
+   margin-left:100px;
+
+}
+h3{
+    font-family: "Source Sans Pro", sans-serif;
+  position:center;
+  color:#2c2c81;
+  background-color:#e9e9f8;
+  font-style:italic;
+  margin-left:400px;
+
+}
+table{
+   
+    margin-top:30px;
+     text-align:center;
+     height:300px;width:1000px; 
+      margin-left:200px; 
+      border:groove;
+      font-family:Source Sans Pro, sans-serif;
+        
+}

@@ -1,0 +1,287 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jul 17, 2019 at 04:18 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 5.6.40
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `attendance_man_sys`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adminlogin`
+--
+
+CREATE TABLE `adminlogin` (
+  `id` int(5) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `adminlogin`
+--
+
+INSERT INTO `adminlogin` (`id`, `username`, `password`) VALUES
+(1, 'amir', 432),
+(2, 'adnan', 765);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendance`
+--
+
+CREATE TABLE `attendance` (
+  `studentidno` int(10) NOT NULL,
+  `present` int(10) NOT NULL,
+  `coursecode` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `srlno` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`studentidno`, `present`, `coursecode`, `srlno`) VALUES
+(4001230, 20, 'SE-204', 1),
+(4001100, 20, 'SE-204', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courses`
+--
+
+CREATE TABLE `courses` (
+  `regno` int(10) NOT NULL,
+  `coursecode` varchar(10) NOT NULL,
+  `coursemode` varchar(20) NOT NULL,
+  `coursetitle` varchar(50) NOT NULL,
+  `lastclassentered` varchar(20) NOT NULL,
+  `classesheld` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`regno`, `coursecode`, `coursemode`, `coursetitle`, `lastclassentered`, `classesheld`) VALUES
+(4001230, 'CS-111', 'PRACTICAL/THEORY', 'PROGRAMMING LANGUAGES', '15-MAY-2019', 0),
+(4001230, 'MT-282', 'THEORY', 'CALCULUS', '15-MAY-2019', 5),
+(4001100, 'SE-204', 'PRACTICAL/THEORY', 'WEB ENGINEERING', '15-MAY-2019', 0),
+(4001100, 'SE-206', 'PRACTICAL/THEORY', 'DATABASE MANAGEMENT SYSTEM', '20-May-2019', 8),
+(4001100, 'SE-208', 'THEORY', 'SOFTWARE REQUIREMENT ENGINEERING', '15-MAY-2019', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE `student` (
+  `rollno` varchar(13) NOT NULL,
+  `regno` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`rollno`, `regno`) VALUES
+('BCIT-072', 4001230),
+('SESE-076', 4001100);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `studentdetails`
+--
+
+CREATE TABLE `studentdetails` (
+  `rollno` varchar(20) NOT NULL,
+  `firstname` varchar(30) NOT NULL,
+  `lastname` varchar(30) NOT NULL,
+  `nationality` varchar(20) NOT NULL,
+  `religion` varchar(10) NOT NULL,
+  `discipline` varchar(30) NOT NULL,
+  `address` varchar(70) NOT NULL,
+  `dob` varchar(20) NOT NULL,
+  `gender` varchar(7) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `contactno` int(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `studentdetails`
+--
+
+INSERT INTO `studentdetails` (`rollno`, `firstname`, `lastname`, `nationality`, `religion`, `discipline`, `address`, `dob`, `gender`, `email`, `contactno`) VALUES
+('BCIT-072', 'AYAN', 'HUSSAIN', 'Pakistani', 'Islam', 'BCIT', 'HOUSE Q81 BLOCK 5 PECHS KHI', '1-OCT-1998', 'Male', 'ay@yahoo.com', 31129291),
+('SESE-076', 'AMNA', 'SHEIKH', 'Pakistani', 'Islam', 'SE', 'House No 2811 PECHS KHI', '12-SEP-1999', 'Female', 'amna@gmail.com', 31192911);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `studentlogin`
+--
+
+CREATE TABLE `studentlogin` (
+  `Id` int(5) NOT NULL,
+  `regno` int(10) NOT NULL,
+  `password` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `studentlogin`
+--
+
+INSERT INTO `studentlogin` (`Id`, `regno`, `password`) VALUES
+(1, 4001100, '1234'),
+(2, 4001230, '5678');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `studentreg`
+--
+
+CREATE TABLE `studentreg` (
+  `rollno` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `studentreg`
+--
+
+INSERT INTO `studentreg` (`rollno`) VALUES
+('SESE-076');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `adminlogin`
+--
+ALTER TABLE `adminlogin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD PRIMARY KEY (`srlno`),
+  ADD KEY `att_cc_fk` (`coursecode`),
+  ADD KEY `att_s_fk` (`studentidno`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`coursecode`),
+  ADD KEY `c_rn_fk` (`regno`);
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`regno`),
+  ADD KEY `rn_srM_fk` (`rollno`);
+
+--
+-- Indexes for table `studentdetails`
+--
+ALTER TABLE `studentdetails`
+  ADD PRIMARY KEY (`rollno`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `studentlogin`
+--
+ALTER TABLE `studentlogin`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `sl_rn_fk` (`regno`);
+
+--
+-- Indexes for table `studentreg`
+--
+ALTER TABLE `studentreg`
+  ADD KEY `rn_sr_fk` (`rollno`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `adminlogin`
+--
+ALTER TABLE `adminlogin`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `attendance`
+--
+ALTER TABLE `attendance`
+  MODIFY `srlno` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `studentlogin`
+--
+ALTER TABLE `studentlogin`
+  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD CONSTRAINT `att_s_fk` FOREIGN KEY (`studentidno`) REFERENCES `student` (`regno`);
+
+--
+-- Constraints for table `courses`
+--
+ALTER TABLE `courses`
+  ADD CONSTRAINT `c_rn_fk` FOREIGN KEY (`regno`) REFERENCES `student` (`regno`);
+
+--
+-- Constraints for table `student`
+--
+ALTER TABLE `student`
+  ADD CONSTRAINT `rn_srM_fk` FOREIGN KEY (`rollno`) REFERENCES `studentdetails` (`rollno`);
+
+--
+-- Constraints for table `studentlogin`
+--
+ALTER TABLE `studentlogin`
+  ADD CONSTRAINT `sl_rn_fk` FOREIGN KEY (`regno`) REFERENCES `student` (`regno`);
+
+--
+-- Constraints for table `studentreg`
+--
+ALTER TABLE `studentreg`
+  ADD CONSTRAINT `rn_sr_fk` FOREIGN KEY (`rollno`) REFERENCES `studentdetails` (`rollno`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
